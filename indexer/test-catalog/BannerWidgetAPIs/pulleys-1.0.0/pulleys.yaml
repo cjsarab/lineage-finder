@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: pulleys
+  description: Needs the second reader because of the line break inside the $ref below.
+  version: 1.0.0
+  x-deprecated-on: 2019-06-30
+  x-sunset-on: 2019-12-31
+paths:
+  /api/pulleys:
+    get:
+      summary: Lists pulleys.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/pulleys-with-a-very-long-name-that-wraps.\
+                properties"
+components:
+  schemas: {}

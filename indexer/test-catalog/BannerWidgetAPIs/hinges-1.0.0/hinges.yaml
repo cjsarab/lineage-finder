@@ -1,0 +1,6 @@
+openapi: 3.0.0
+info:
+  title: hinges
+  description: Holds another API's folder by mistake.
+  version: 1.0.0
+paths: {}

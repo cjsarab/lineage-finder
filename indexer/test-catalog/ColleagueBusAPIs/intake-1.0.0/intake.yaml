@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: intake
+  description: Made-up Colleague Business API on a Colleague form.
+  version: 1.0.0
+  x-source-name: WDG001
+  x-source-title: Widget Intake (WDGI)
+paths:
+  /intake:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string

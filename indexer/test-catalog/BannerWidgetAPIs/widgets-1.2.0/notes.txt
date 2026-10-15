@@ -1,0 +1,1 @@
+Not a spec: a text file next to the YAML, which the indexer ignores.

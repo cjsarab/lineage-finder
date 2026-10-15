@@ -1,0 +1,38 @@
+# Ellucian's API catalog is the customer's own licensed material.
+# It must NEVER be committed. Users supply their own copy.
+APICatalog/
+**/APICatalog/
+# Ellucian's five-zip download (since 2026): the zips and their extracted folders, anywhere.
+production_API_catalog_*
+# The app's own folder for the zips, and any zip anywhere.
+catalog-zips/
+*.zip
+
+# Belt and braces: catalog-shaped files anywhere outside the app's own code
+*.pdf
+
+# Dependencies, builds and local data
+node_modules/
+dist/
+build/
+.cache/
+*.sqlite
+*.db
+
+# Secrets and local settings
+.env
+.env.*
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# The app's index of your catalog: derived from the catalog, never committed.
+# Also renamed copies (e.g. data-old, made while testing a first run).
+data/
+data-*/
+
+# Release zips: made by npm run release, published on GitHub, never committed.
+releases/

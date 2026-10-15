@@ -1,0 +1,31 @@
+name: Problem or idea
+description: Something went wrong, or something you'd like Lineage Finder to do.
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Issues are public. Please don't paste anything from the API catalog, or about your institution.
+        Lineage Finder is a spare-time project, shared as is.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, or what's your idea?
+      description: What you did, and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: The message you saw
+      description: If the app or the terminal showed a message, paste it here.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Lineage Finder version
+      description: In the app, Settings > About.
+  - type: input
+    id: node
+    attributes:
+      label: Node.js version
+      description: Type node --version in a terminal.

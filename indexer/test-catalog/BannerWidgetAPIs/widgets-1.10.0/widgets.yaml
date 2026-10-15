@@ -1,0 +1,6 @@
+openapi: 3.0.0
+info:
+  title: widgets
+  description: Version 1.10.0, which must sort after 1.2.0.
+  version: 1.10.0
+paths: {}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>Lineage Finder</title>
+    <script id="early-look">
+      // Pick light or dark, and the accent colour, before the page draws, so there's no flash.
+      // Same rules as src/lib/theme.ts and src/lib/accents.ts.
+      try {
+        var theme = localStorage.getItem("lineage-finder:theme")
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+        }
+        if (theme === "dark") document.documentElement.classList.add("dark")
+        // Only a plain word, as every preset is; anything else leaves the default (Amber, in theme.css).
+        var accent = localStorage.getItem("lineage-finder:accent")
+        if (accent && /^[a-z]+$/.test(accent)) document.documentElement.dataset.accent = accent
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

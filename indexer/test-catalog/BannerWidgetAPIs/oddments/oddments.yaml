@@ -1,0 +1,6 @@
+openapi: 3.0.0
+info:
+  title: oddments
+  description: Folder name without a version number (never seen in the real catalog, but handled).
+  version: 1.0.0
+paths: {}

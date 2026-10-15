@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: widget-summary
+  description: Made-up ERP API whose source names a Business form, a table and a form-letter name.
+  version: 1.0.0
+  x-source-name: SWAWIDG, SWBWREQ and SWIWINQ
+  x-source-title: Widget summary
+paths:
+  /api/widget-summary:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer

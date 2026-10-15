@@ -1,0 +1,22 @@
+openapi: 3.0.0
+info:
+  title: levers
+  description: The spec says 1.0.0 but the folder says 1.1.0. Folder wins, or it would clash with levers-1.0.0.
+  version: 1.0.0
+paths:
+  /api/levers:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lever"
+components:
+  schemas:
+    Lever:
+      type: object
+      properties:
+        code:
+          description: The lever's code. Newer words.
+          x-lineageReferenceObject: SWBLEVR_CODE

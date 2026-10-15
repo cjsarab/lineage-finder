@@ -1,0 +1,7 @@
+openapi: 3.0.0
+info:
+  title: ratchets
+  description: First description, which the repeated key replaces.
+  version: 1.0.0
+  description: Second description, which wins.
+paths: {}

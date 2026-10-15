@@ -1,0 +1,7 @@
+openapi: 3.0.0
+info:
+  title: cogs
+  description: Beta, shown by the release status only. Uses the .yml extension.
+  version: 1.0.0
+  x-release-status: beta
+paths: {}

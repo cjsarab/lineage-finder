@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: widget-requests
+  description: Made-up Business API on a form, with a key block and names that aren't tables.
+  version: 1.0.0
+  x-api-type: bus-poc
+  x-source-name: SWAWIDG
+  x-source-title: Widget Maintenance
+paths:
+  /api/widget-requests:
+    get:
+      parameters:
+        - name: id
+          in: query
+        - name: termCode
+          in: query
+        - name: status
+          in: query
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+components:
+  schemas:
+    Request:
+      x-lineageReferenceObject: SWBWREQ
+      type: object
+      properties:
+        code:
+          x-lineageReferenceObject: SWBWREQ_CODE
+        course:
+          # A form's name with a column-like ending: not a table (third letter A).
+          x-lineageReferenceObject: SWACRSE_CRSE_NUMB
+        keys:
+          # A form's key block, once wrongly read as table SWAWIDG.
+          x-lineageReferenceObject: SWAWIDG_KEY_BLOCK
+        termEff:
+          # Was a "probable" column of SWAWIDG.
+          x-lineageReferenceObject: swawidgTermEff
+        term:
+          # Kept in SWBWREQ, checked against SXVTERM.
+          x-lineageReferenceObject: SWBWREQ_TERM_CODE
+          x-lineageLookupReferenceObject: sxvterm
+        types:
+          # A list with a schema owner: each table links.
+          x-lineageLookupReferenceObject: saturn,sxvterm, swvwtyp
+        page:
+          # A lookup naming a form.
+          x-lineageLookupReferenceObject: SWAWIDG
+        widgetType:
+          # A lookup naming an API of the same family.
+          x-lineageLookupReferenceObject: widget-types
+        sprocket:
+          # The only API of that name in Banner, in another family: linked.
+          x-lineageLookupReferenceObject: sprockets
+        parameter:
+          # A table no lineage names: on the tables list as named only in lookups.
+          x-lineageLookupReferenceObject: SWBPVAL
+        checked:
+          # SQL in a lookup: its table names link, the rest stays as written.
+          x-lineageLookupReferenceObject: select sxvterm_code from sxvterm
+        fee:
+          x-lineageReferenceObject: derived
+          x-lineageDerivedLogic: Adds SXVTERM_CODE to SWBWREQ_FEE_AMT for the display term, checked against SWBPVAL.
+        shown:
+          # A form's on-screen item, not a table, nor are guesses from it.
+          x-lineageReferenceObject: DISPLAY_TEXT_IND
+        displayOptions:
+          x-lineageReferenceObject: displayOptions
+        amount:
+          # A word written alone, not a table.
+          x-lineageReferenceObject: amount
+    Keys:
+      x-lineageReferenceObject: key_block
+      type: object
+      properties:
+        id:
+          type: string
+        termCode:
+          type: string

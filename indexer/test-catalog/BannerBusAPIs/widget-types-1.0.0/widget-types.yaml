@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: widget-types
+  description: API for SWVWTYP administrative page. Made-up validation form that is also a table; no x-source-name.
+  version: 1.0.0
+paths:
+  /api/widget-types:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                x-lineageReferenceObject: SWVWTYP
+                type: object
+                properties:
+                  code:
+                    x-lineageReferenceObject: SWVWTYP_CODE
+                  term:
+                    x-lineageReferenceObject: SXVTERM_CODE

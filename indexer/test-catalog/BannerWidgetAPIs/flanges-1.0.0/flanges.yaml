@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: flanges
+  description: Made-up Business API with base tables and lineage on query parameters.
+  version: 1.0.0
+  x-api-type: bus-poc
+  x-source-name: SWAFLNG
+  x-source-title: Flange Maintenance
+paths:
+  /api/flanges:
+    get:
+      parameters:
+        - name: code
+          in: query
+          x-lineageReferenceObject: SWBFLNG_CODE
+        - name: ownerTitle
+          in: query
+          x-lineageReferenceObject: swbflngTitle
+        - name: typeFlag
+          in: query
+          schema:
+            type: string
+            x-lineageReferenceObject: TYPE_IND
+        - name: size
+          in: query
+          x-lineageLookupReferenceObject: SWVSIZE
+        - name: limit
+          in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Flange"
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FlangeUpdate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlangeUpdate"
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FlangeDetail"
+      responses:
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorBlock"
+  /api/flanges/keys:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KeyBlock"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlangeForm"
+components:
+  schemas:
+    Flange:
+      x-lineageReferenceObject: swbflng
+      type: object
+      properties:
+        code:
+          x-lineageReferenceObject: SWBFLNG_CODE
+        owner:
+          $ref: "#/components/schemas/Owner"
+    FlangeUpdate:
+      x-LineageReferenceObject: SWBFLNG
+      type: object
+      properties:
+        code:
+          x-lineageReferenceObject: SWBFLNG_CODE
+    FlangeDetail:
+      allOf:
+        - x-lineageReferenceObject: SWRFLDT
+          type: object
+          properties:
+            note:
+              type: string
+    KeyBlock:
+      x-lineageReferenceObject: KEY_BLOCK
+      type: object
+      properties:
+        term:
+          type: string
+    FlangeForm:
+      # A Banner page's (form's) name, as a few real base values are: it mustn't make camelCase names into its columns.
+      x-lineageReferenceObject: SWAFLNG
+      type: object
+      properties:
+        formCode:
+          x-lineageReferenceObject: swaflngCode
+    Owner:
+      x-lineageReferenceObject: SWBOWNR
+      type: object
+      properties:
+        name:
+          x-lineageReferenceObject: SWBOWNR_NAME
+    ErrorBlock:
+      x-lineageReferenceObject: SWBERRS
+      type: object
+      properties:
+        message:
+          type: string
+    Unused:
+      x-lineageReferenceObject: SWBUNSD
+      type: object
+      properties:
+        spare:
+          type: string

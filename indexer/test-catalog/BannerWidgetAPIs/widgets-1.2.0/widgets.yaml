@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: widgets
+  description: Made-up widgets API used to test the indexer.
+  version: 1.2.0
+  x-api-type: bus-poc
+  x-release-status: ga
+  x-source-system: banner
+  x-source-domain: Student
+  x-source-name: SWAWIDG
+  x-source-title: Widget Maintenance
+  x-audience: public
+paths:
+  /api/widgets:
+    parameters:
+      - name: limit
+        in: query
+    get:
+      summary: Lists widgets.
+      x-method-permissions: API_WIDGETS, API_WIDGETS_READ
+      parameters:
+        - name: criteria
+          in: query
+          description: Filter the widgets.
+        - name: limit
+          in: query
+          required: true
+          description: How many to return.
+        - name: Accept
+          in: header
+        - $ref: "#/components/parameters/expand"
+        - name: no-place
+        - "not a parameter"
+      responses:
+        "200":
+          content:
+            application/vnd.hedtech.integration.v2+json: {}
+            application/json: {}
+        "400":
+          content:
+            application/vnd.hedtech.integration.errors.v2+json: {}
+    post:
+      summary: Creates a widget.
+      x-method-permission:
+        - API_WIDGETS
+        - API_OVERRIDE
+  /api/widgets/{id}:
+    x-method-permission: null
+    put:
+      summary: Updates a widget.
+      parameters:
+        - name: id
+          in: path
+          required: true
+      responses:
+        "200":
+          content:
+            application/vnd.hedtech.integration.v2+json: {}
+            application/vnd.hedtech.integration.v2.1.0+json: {}
+      x-method-prermissions: " 'API_WIDGETS', 'API_UPDATE' "
+    delete:
+      summary: Deletes a widget.
+      "{ \"x-method-permissionS\": \"API_WIDGETS_DELETE\" }": null
+    patch:
+      summary: Patches a widget.
+      x-method-permissions: null
+components:
+  parameters:
+    expand:
+      name: X-SDE-Expand
+      in: header
+      description: Expands the response.

@@ -1,0 +1,6 @@
+openapi: 3.0.0
+info:
+  title: widgets
+  description: The spec says 2.0, which is the same as the folder's 2.0.0 once padded.
+  version: 2.0
+paths: {}

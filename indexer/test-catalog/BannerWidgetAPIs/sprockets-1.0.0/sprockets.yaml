@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: sprockets
+  description: Beta, shown by the spec's version. Also holds made-up lineage in every format.
+  version: 1.0.0-beta
+paths:
+  /api/sprockets:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sprocket"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorDetails"
+    post:
+      requestBody:
+        $ref: "#/components/requestBodies/NewSprocket"
+      responses:
+        "201":
+          $ref: "#/components/responses/Created"
+components:
+  requestBodies:
+    NewSprocket:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Sprocket"
+  responses:
+    Created:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              createdBy:
+                x-lineageReferenceObject: SWBSPRK_USER_ID
+  schemas:
+    Sprocket:
+      x-lineageReferenceObject: swbsprk
+      type: object
+      properties:
+        id:
+          x-lineageReferenceObject: GORGUID_GUID(LDM_NAME='sprockets')
+        code:
+          x-lineageReferenceObject: SWBSPRK_CODE
+        owner:
+          $ref: "#/components/schemas/Owner"
+        sizes:
+          type: array
+          items:
+            type: object
+            properties:
+              size:
+                x-LineageReferenceObject: SWRSIZE_SIZE(SWRSIZE)
+        tags:
+          type: array
+          items:
+            type: string
+            x-lineageReferenceObject: swbtags
+        status:
+          type: string
+        parent:
+          $ref: "#/components/schemas/Sprocket"
+    Owner:
+      allOf:
+        - type: object
+          properties:
+            pidm:
+              x-lineageObject: SWBSPRK_PIDM
+            title:
+              x-lineageReferenceObject: swbsprkTitle
+            preference:
+              x-lineageReferenceObject: unsupported
+        - type: object
+          properties:
+            fullName:
+              x-lineageReferenceObject: derived
+              x-lineageDerivedLogic: Joins the first and last names.
+              x-lineageLookupReferenceObject: SWVNAME
+            batch:
+              x-lineageReferenceObject: BATCH_ID
+            keyed:
+              x-lineageReferenceObject: KEYBLCK_TERM
+            grant:
+              x-lineageReferenceObject: SWRGRNT.AWARD_AMT
+            either:
+              x-lineageReferenceObject: SWBSPRK_CODE or SWRSIZE_SIZE
+            listed:
+              x-lineageReferenceObject:
+                - SWBSPRK_CODE
+                - SWBSPRK_PIDM
+            plain:
+              x-lineageReferenceObject: id
+    OldSprocket:
+      type: object
+      properties:
+        legacy:
+          x-lineageReferenceObject: SWBOLDS_LEGACY
+    NoLineage:
+      type: object
+      properties:
+        nothing:
+          type: string
+    ErrorDetails:
+      type: object
+      properties:
+        message:
+          type: string
