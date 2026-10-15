@@ -1,6 +1,6 @@
 {
   "name": "lineage-finder",
-  "version": "0.15.0",
+  "version": "1.0.0",
   "description": "Unofficial, local-only browser for the API catalog you download from Ellucian. Not affiliated with Ellucian.",
   "license": "MIT",
   "private": true,
